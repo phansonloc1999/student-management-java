@@ -1,8 +1,12 @@
 package Lib;
 
+import java.util.ArrayList;
+
 public class Student {
     private int id;
     private String name;
+
+    private ArrayList<Course> courses;
 
     // Getters va Setters
     public int getId() {
@@ -25,6 +29,7 @@ public class Student {
     public Student(int id, String name) {
         this.id = id;
         this.name = name;
+        this.courses = new ArrayList<Course>();
     }
 
     // Copy constructor
@@ -41,5 +46,18 @@ public class Student {
     public void clearInfo() {
         id = -1;
         name = "";
+    }
+
+    public void joinCourse(Course course) {
+        courses.add(course);
+    }
+
+    public void printCourses() {
+        if (courses.size() > 0) {
+            for (int i = 0; i < courses.size(); i++) {
+                courses.get(i).printInfo();
+            }
+        } else
+            System.out.println("No course joined!");
     }
 }
