@@ -48,12 +48,13 @@ public class Student {
         name = "";
     }
 
-    public void joinCourse(Course course) {
+    public void enrollCourse(Course course) {
         courses.add(course);
     }
 
     public void printCourses() {
         if (courses.size() > 0) {
+            System.out.println("List of courses enrolled");
             for (int i = 0; i < courses.size(); i++) {
                 courses.get(i).printInfo();
             }
