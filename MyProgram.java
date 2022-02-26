@@ -7,8 +7,9 @@ public class MyProgram {
         Course cs101 = new Course(2022101, "Computer Science 101", 4, 130);
         student.printInfo();
         student.enrollCourse(cs101);
-        student.printCourses();
         student.unenrollCourse(cs101);
-        student.printCourses();
+        student.printTuitionFee();
+        student.clearInfo();
+        student.printInfo();
     }
 }

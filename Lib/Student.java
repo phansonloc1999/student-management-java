@@ -41,6 +41,7 @@ public class Student {
     public void printInfo() {
         System.out.println("ID: " + id);
         System.out.println("Name: " + name);
+        System.out.println();
     }
 
     public void clearInfo() {
@@ -57,9 +58,12 @@ public class Student {
             System.out.println("List of courses enrolled");
             for (int i = 0; i < courses.size(); i++) {
                 courses.get(i).printInfo();
+                System.out.println();
             }
-        } else
+        } else {
             System.out.println("No course joined!");
+            System.out.println();
+        }
     }
 
     public void unenrollCourse(Course course) {
@@ -69,7 +73,23 @@ public class Student {
                     courses.remove(i);
                 }
             }
-        } else
+        } else {
             System.out.println("No course joined!");
+            System.out.println();
+        }
+    }
+
+    public void printTuitionFee() {
+        if (courses.size() > 0) {
+            int total = 0;
+            for (int i = 0; i < courses.size(); i++) {
+                total += courses.get(i).getTuitionFee();
+            }
+            System.out.println("Total tuition fee: " + total + "$");
+            System.out.println();
+        } else {
+            System.out.println("No course joined!");
+            System.out.println();
+        }
     }
 }
