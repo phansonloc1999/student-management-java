@@ -24,11 +24,13 @@ public class MyProgram {
         // i.printStackTrace();
         // }
 
-        Scanner loginScanner = new Scanner(System.in);
-        System.out.print("Username: ");
-        String username = loginScanner.nextLine();
-        System.out.print("Password: ");
-        String password = loginScanner.nextLine();
+        Console console = System.console();
+        if (console == null) {
+            System.out.println("Coudln't get Console instance!");
+        }
+        String username = console.readLine("Enter your username: ");
+        char[] passwordArray = console.readPassword("Enter your secret password: ");
+        String password = new String(passwordArray);
 
         try {
             File file = new File("student.txt");
