@@ -8,7 +8,16 @@ public class Student {
 
     private ArrayList<Course> courses;
 
-    // Getters and Setters
+    private Account account;
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
     public int getId() {
         return id;
     }
@@ -26,9 +35,10 @@ public class Student {
     }
 
     // Default constructor
-    public Student(int id, String name) {
+    public Student(int id, String name, String username, String password) {
         this.id = id;
         this.name = name;
+        this.account = new Account(username, password);
         this.courses = new ArrayList<Course>();
     }
 
@@ -91,5 +101,9 @@ public class Student {
             System.out.println("No course joined!");
             System.out.println();
         }
+    }
+
+    public boolean login(String username, String password) {
+        return account.authenticate(username, password);
     }
 }
