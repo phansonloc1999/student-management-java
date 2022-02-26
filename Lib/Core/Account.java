@@ -1,4 +1,4 @@
-package Lib;
+package Lib.Core;
 
 public class Account {
     private String username;
@@ -26,7 +26,7 @@ public class Account {
     }
 
     public boolean authenticate(String username, String password) {
-        if (username == this.username && password == this.password) {
+        if (username.equals(this.username) && password.equals(this.password)) {
             return true;
         }
         return false;

@@ -1,4 +1,4 @@
-package Lib;
+package Lib.Core;
 
 public class Course {
     private int id;

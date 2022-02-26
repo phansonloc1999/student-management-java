@@ -1,9 +1,9 @@
 import java.io.*;
 import java.util.Scanner;
 
-import Lib.Account;
-import Lib.Course;
-import Lib.Student;
+import Lib.Core.Account;
+import Lib.Core.Course;
+import Lib.Core.Student;
 
 public class MyProgram {
     public static void main(String[] args) {
@@ -24,6 +24,12 @@ public class MyProgram {
         // i.printStackTrace();
         // }
 
+        Scanner loginScanner = new Scanner(System.in);
+        System.out.print("Username: ");
+        String username = loginScanner.nextLine();
+        System.out.print("Password: ");
+        String password = loginScanner.nextLine();
+
         try {
             File file = new File("student.txt");
             Scanner scanner = new Scanner(file);
@@ -35,7 +41,15 @@ public class MyProgram {
                     student.getAccount().setUsername(tokens[1]);
                 if (tokens[0].equals("Password"))
                     student.getAccount().setPassword(tokens[1]);
+
+                if (student.login(new Account(username, password))) {
+                    System.out.println("Login successfully!");
+                    scanner.close();
+                    return;
+                }
             }
+
+            System.out.println("Login failed!");
 
             scanner.close();
         } catch (FileNotFoundException e) {

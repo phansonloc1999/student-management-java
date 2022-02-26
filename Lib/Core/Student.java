@@ -1,4 +1,4 @@
-package Lib;
+package Lib.Core;
 
 import java.util.ArrayList;
 
