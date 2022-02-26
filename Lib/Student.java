@@ -35,6 +35,13 @@ public class Student {
     }
 
     // Default constructor
+    public Student() {
+        this.id = -1;
+        this.name = "";
+        this.account = new Account("", "");
+        this.courses = new ArrayList<Course>();
+    }
+
     public Student(int id, String name, String username, String password) {
         this.id = id;
         this.name = name;
@@ -103,7 +110,16 @@ public class Student {
         }
     }
 
-    public boolean login(String username, String password) {
-        return account.authenticate(username, password);
+    public boolean login(Account acc) {
+        return account.authenticate(acc.getUsername(), acc.getPassword());
+    }
+
+    @Override
+    public String toString() {
+        String coursesStr = "";
+        for (int i = 0; i < this.courses.size(); i++) {
+            coursesStr += this.courses.get(i).getId() + " ";
+        }
+        return account.toString() + "\nID: " + id + "\nName: " + name + "\nCourses: " + coursesStr;
     }
 }

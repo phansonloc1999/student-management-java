@@ -52,4 +52,9 @@ public class Course {
         System.out.println("Credit: " + credit);
         System.out.println("Tuition fee: " + tuition_fee + "$");
     }
+
+    @Override
+    public String toString() {
+        return "ID: " + id + "\nName: " + name + "\nCredit: " + credit + "\nTuition fee: " + tuition_fee;
+    }
 }
