@@ -61,4 +61,15 @@ public class Student {
         } else
             System.out.println("No course joined!");
     }
+
+    public void unenrollCourse(Course course) {
+        if (courses.size() > 0) {
+            for (int i = 0; i < courses.size(); i++) {
+                if (courses.get(i).getId() == course.getId()) {
+                    courses.remove(i);
+                }
+            }
+        } else
+            System.out.println("No course joined!");
+    }
 }

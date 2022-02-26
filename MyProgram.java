@@ -8,5 +8,7 @@ public class MyProgram {
         student.printInfo();
         student.enrollCourse(cs101);
         student.printCourses();
+        student.unenrollCourse(cs101);
+        student.printCourses();
     }
 }
