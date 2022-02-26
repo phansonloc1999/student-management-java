@@ -8,7 +8,7 @@ public class Student {
 
     private ArrayList<Course> courses;
 
-    // Getters va Setters
+    // Getters and Setters
     public int getId() {
         return id;
     }
@@ -38,12 +38,6 @@ public class Student {
         this.name = other.name;
     }
 
-    public void printInfo() {
-        System.out.println("ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println();
-    }
-
     public void clearInfo() {
         id = -1;
         name = "";
@@ -53,12 +47,12 @@ public class Student {
         courses.add(course);
     }
 
-    public void printCourses() {
+    public void unenrollCourse(Course course) {
         if (courses.size() > 0) {
-            System.out.println("List of courses enrolled");
             for (int i = 0; i < courses.size(); i++) {
-                courses.get(i).printInfo();
-                System.out.println();
+                if (courses.get(i).getId() == course.getId()) {
+                    courses.remove(i);
+                }
             }
         } else {
             System.out.println("No course joined!");
@@ -66,12 +60,18 @@ public class Student {
         }
     }
 
-    public void unenrollCourse(Course course) {
+    public void printInfo() {
+        System.out.println("ID: " + id);
+        System.out.println("Name: " + name);
+        System.out.println();
+    }
+
+    public void printCourses() {
         if (courses.size() > 0) {
+            System.out.println("List of courses enrolled");
             for (int i = 0; i < courses.size(); i++) {
-                if (courses.get(i).getId() == course.getId()) {
-                    courses.remove(i);
-                }
+                courses.get(i).printInfo();
+                System.out.println();
             }
         } else {
             System.out.println("No course joined!");
