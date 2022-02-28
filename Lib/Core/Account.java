@@ -9,6 +9,10 @@ public class Account {
         this.password = password;
     }
 
+    public Account() {
+        this("", "");
+    }
+
     public String getUsername() {
         return username;
     }
