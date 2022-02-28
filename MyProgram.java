@@ -29,8 +29,6 @@ public class MyProgram {
                 java.sql.Statement stm = conn.createStatement();
                 ResultSet rs = stm.executeQuery("SELECT * FROM Users;");
                 while (rs.next()) {
-                    System.out.println(
-                            rs.getInt(1) + "\t" + rs.getInt(2) + "\t" + rs.getString(3) + "\t" + rs.getString(4));
                     Account acc = new Account();
                     acc.setUsername(rs.getString(2));
                     acc.setPassword(rs.getString(3));
