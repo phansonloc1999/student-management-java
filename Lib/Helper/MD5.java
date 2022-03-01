@@ -1,15 +1,15 @@
 package Lib.Helper;
 
 import java.security.MessageDigest;
-import sun.misc.BASE64Encoder;
+import java.util.Base64;
 
-public class MD5 {
+public abstract class MD5 {
     /**
      * Cipher for encode
      */
-    private final MessageDigest md;
+    private static final MessageDigest md;
 
-    public MD5() throws SecurityException {
+    static {
         try {
             md = MessageDigest.getInstance("MD5", "SUN");
         } catch (Exception se) {
@@ -17,7 +17,7 @@ public class MD5 {
         }
     }
 
-    public String encode(String in) throws Exception {
+    public static String encode(String in) throws Exception {
         if (in == null) {
             return null;
         }
@@ -28,15 +28,15 @@ public class MD5 {
             synchronized (md) {
                 raw = md.digest(stringBytes);
             }
-            BASE64Encoder encoder = new BASE64Encoder();
-            return encoder.encode(raw);
+            Base64.Encoder encoder = Base64.getEncoder();
+            return encoder.encodeToString(raw);
         } catch (Exception se) {
             throw new Exception("Exception while encoding " + se);
         }
 
     }
 
-    public String decode(String in) {
+    public static String decode(String in) {
         throw new RuntimeException("NOT SUPPORTED");
     }
 }
