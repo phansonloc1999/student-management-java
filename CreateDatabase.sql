@@ -1,10 +1,10 @@
-CREATE DATABASE test;
+CREATE DATABASE Test;
 
-USE test;
+USE Test;
 
 CREATE TABLE Users (
     ID INT(6) UNSIGNED PRIMARY KEY,
     Username VARCHAR(20) NOT NULL,
-    Password VARCHAR(20) NOT NULL,
+    Password VARCHAR(30) NOT NULL,
     Name VARCHAR(30) NOT NULL
 );

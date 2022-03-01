@@ -11,20 +11,23 @@ import java.sql.DriverManager;
 import Lib.Core.Account;
 import Lib.Core.Course;
 import Lib.Core.Student;
+import Lib.Helper.MD5;
 
 public class MyProgram {
 
+    public static final String serverName = "localhost";
+    public static final String portNum = "3306";
+    public static final String databaseName = "Test";
+    public static final String username = "sonloc";
+    public static final String password = "phansonloc123";
+
     public static ArrayList<Account> getUserAccounts() {
-        // try {
-        // Class.forName("com.mysql.jdbc.Driver");
-        // } catch (ClassNotFoundException e) {
-        // e.printStackTrace();
-        // }
 
         ArrayList<Account> accounts = new ArrayList<Account>();
         Connection conn = null;
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/test", "sonloc", "");
+            conn = DriverManager.getConnection("jdbc:mysql://" + serverName + ":" + portNum + "/" + databaseName,
+                    username, password);
             if (conn != null) {
                 java.sql.Statement stm = conn.createStatement();
                 ResultSet rs = stm.executeQuery("SELECT * FROM Users;");
@@ -45,34 +48,27 @@ public class MyProgram {
     }
 
     public static void main(String[] args) {
-        // Student student = new Student(1712571, "Phan Son Loc", "1712571",
-        // "phansonloc123");
-        // Course cs101 = new Course(2022101, "Computer Science 101", 4, 130);
-        // Course math50 = new Course(202250, "Linear Algebra 40", 4, 130);
-        // student.printInfo();
-        // student.enrollCourse(cs101);
-        // student.enrollCourse(math50);
-        // student.printTuitionFee();
-        // System.out.println("Logged in: " + student.login(new Account("1712571",
-        // "phansonloc123")));
-
-        // try (PrintWriter out = new PrintWriter("student.txt");) {
-        // out.println(student.toString());
-        // } catch (IOException i) {
-        // i.printStackTrace();
-        // }
-
-        // try {
-        // File file = new File("student.txt");
-        // Scanner scanner = new Scanner(file);
-        // Student student = new Student();
-
-        // while (scanner.hasNextLine()) {
-        // String[] tokens = scanner.nextLine().split(": ");
-        // if (tokens[0].equals("Username"))
-        // student.getAccount().setUsername(tokens[1]);
-        // if (tokens[0].equals("Password"))
-        // student.getAccount().setPassword(tokens[1]);
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://" + serverName + ":" + portNum + "/" + databaseName,
+                    username, password);
+            if (conn != null) {
+                java.sql.Statement stm = conn.createStatement();
+                stm.execute("truncate Users");
+                String encryptedPass = null;
+                try {
+                    encryptedPass = MD5.encode("phansonloc123");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                System.out.println(encryptedPass);
+                stm.execute(
+                        "INSERT INTO Users (ID, Username, Password, Name) VALUES (1712571, '1712571', '" + encryptedPass
+                                + "', 'Phan Son Loc')");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         ArrayList<Account> accounts = getUserAccounts();
 
@@ -83,9 +79,15 @@ public class MyProgram {
         String username = console.readLine("Enter your username: ");
         char[] passwordArray = console.readPassword("Enter your secret password: ");
         String password = new String(passwordArray);
+        String hashedPassword = null;
+        try {
+            hashedPassword = MD5.encode(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         for (Account account : accounts) {
-            if (account.authenticate(username, password)) {
+            if (account.authenticate(username, hashedPassword)) {
                 System.out.println("Logged in as " + username);
                 return;
             }
