@@ -1,1 +1,1 @@
-INSERT INTO Test.Users (ID, Username, Password, Name) VALUES (1712571, '1712571', 'phansonloc123', 'Phan Son Loc');
+INSERT INTO Test.Users (ID, Username, Password, Name, Phone_number) VALUES (1712571, '1712571', 'phansonloc123', 'Phan Son Loc', '0915646178');

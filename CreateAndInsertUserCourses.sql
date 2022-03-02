@@ -2,4 +2,6 @@ CREATE TABLE Test.Users_Courses (
     Id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
     User_ID INT NOT NULL,
     Course_ID INT NOT NULL
-)
+);
+
+INSERT INTO Test.Users_Courses (Id, User_ID, Course_ID) VALUES ('1','1712571','202250101');

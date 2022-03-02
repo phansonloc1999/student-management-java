@@ -5,18 +5,10 @@ import java.util.ArrayList;
 public class Student {
     private int id;
     private String name;
+    private Account account;
+    private String phoneNumber;
 
     private ArrayList<Course> courses;
-
-    private Account account;
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
 
     public int getId() {
         return id;
@@ -32,6 +24,22 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     // Default constructor
