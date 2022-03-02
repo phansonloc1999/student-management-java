@@ -1,16 +1,11 @@
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.sql.DriverManager;
 
 import Lib.Core.Account;
-import Lib.Core.Course;
-import Lib.Core.Student;
 import Lib.Helper.MD5;
 
 public class MyProgram {
