@@ -42,51 +42,21 @@ public class MyProgram {
         return accounts;
     }
 
-    public static void main(String[] args) {
+    public static void studentEnrollToCourse(String studentId, String courseId) {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection("jdbc:mysql://" + serverName + ":" + portNum + "/" + databaseName,
                     username, password);
             if (conn != null) {
                 java.sql.Statement stm = conn.createStatement();
-                stm.execute("truncate Users");
-                String encryptedPass = null;
-                try {
-                    encryptedPass = MD5.encode("phansonloc123");
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                System.out.println(encryptedPass);
-                stm.execute(
-                        "INSERT INTO Users (ID, Username, Password, Name) VALUES (1712571, '1712571', '" + encryptedPass
-                                + "', 'Phan Son Loc')");
+                ResultSet rs = stm.executeQuery("SELECT COUNT(Id) FROM Courses WHERE Id = '" + courseId + "'");
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
-        ArrayList<Account> accounts = getUserAccounts();
-
-        Console console = System.console();
-        if (console == null) {
-            System.out.println("Coudln't get Console instance!");
-        }
-        String username = console.readLine("Enter your username: ");
-        char[] passwordArray = console.readPassword("Enter your secret password: ");
-        String password = new String(passwordArray);
-        String hashedPassword = null;
-        try {
-            hashedPassword = MD5.encode(password);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        for (Account account : accounts) {
-            if (account.authenticate(username, hashedPassword)) {
-                System.out.println("Logged in as " + username);
-                return;
-            }
-        }
-        System.out.println("Incorrect username or password!");
+    public static void main(String[] args) {
+        studentEnrollToCourse("1712571", "202250101");
     }
 }
