@@ -1,10 +1,7 @@
 import java.io.Console;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.sql.DriverManager;
 
 import Lib.Core.Account;
 import Lib.Helper.MD5;
@@ -18,7 +15,7 @@ public class MyProgram {
     public static final String password = "phansonloc123";
     private static Connection connection = null;
 
-    public static ArrayList<Account> getUserAccounts() {
+    public static ArrayList<Account> getUsers() {
 
         ArrayList<Account> accounts = new ArrayList<Account>();
         Connection conn = null;
@@ -81,6 +78,35 @@ public class MyProgram {
         }
     }
 
+    public static void addUser() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Nhap ID: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Nhap username: ");
+        String username = scanner.nextLine();
+        System.out.print("Nhap password: ");
+        Console console = System.console();
+        String password = new String(console.readPassword());
+        System.out.print("Nhap ho va ten: ");
+        String name = scanner.nextLine();
+        try {
+            String encodedPassword = MD5.encode(password);
+            String query = "INSERT INTO Users VALUES (?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, id);
+            statement.setString(2, username);
+            statement.setString(3, encodedPassword);
+            statement.setString(4, name);
+            statement.executeUpdate();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
+        getDBConnection();
+        addUser();
     }
 }
